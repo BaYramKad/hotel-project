@@ -1,22 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
+
 import './App.css';
-import {Context} from './index'
 
 import { Row, Col } from 'antd';
-import Login from './components/Login'
+import FormUser from './components/FormUser'
+import MainLayout from './components/MainLayout'
 
 function App(){
-    const value = useContext(Context)
-    console.log('db: ', value);
     return (
         <div className="App">
-            <Row align='center' style={{
-        verticalAlign: 'middle',
-      }}>
+            <Row>
                 <Col>
-                    <Login />
+                    <Router>
+                        <Switch>
+                            <Route exact path="/" component={FormUser} />
+                            <Route exact path="/layout" component={MainLayout} />
+                        </Switch>
+                    </Router>
                 </Col>
             </Row>
+
+            
         </div>
     );
 }
