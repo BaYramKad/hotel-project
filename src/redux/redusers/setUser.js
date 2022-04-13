@@ -1,22 +1,33 @@
 
 const initial =  {
     email: null,
-    password: null,
-    token: null
+    token: null,
+    uid: null
 }
 
-const setUser = (state = initial, action) => {
+const setUserReduser = (state = initial, action) => {
+    console.log('action: ', action);
     switch(action.type) {
         case 'SET_USER': 
             return  {
                 ...state,
                 email: action.payload.email,
-                password: action.payload.password,
                 token: action.payload.token,
+                uid: action.payload.uid
+            }
+        case 'REMOVE_USER': 
+            return {
+                ...state,
+                email: null,
+                token: null,
+                uid: null
             }
         default :
             return state
     }
 }
 
-export default setUser
+export const setUserAction = (dataUser) => ({type: 'SET_USER', payload: dataUser})
+export const removeUserAction = () => ({type: 'REMOVE_USER'})
+
+export default setUserReduser;

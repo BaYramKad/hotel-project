@@ -1,22 +1,24 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 
 import './App.css';
 
 import { Row, Col } from 'antd';
-import FormUser from './components/FormUser'
-import MainLayout from './components/MainLayout'
+import MainLayout from './components/pages'
+import LogIn from './components/pages/LogIn';
+import SingUp from './components/pages/SingUp';
 
-function App(){
+function App() {
     return (
         <div className="App">
             <Row>
                 <Col>
                     <Router>
                         <Switch>
-                            <Route exact path="/" component={FormUser} />
-                            <Route exact path="/layout" component={MainLayout} />
+                            <Route path="/register" component={SingUp} />
+                            <Route path="/layout" component={MainLayout} />
+                            <Route exact path="/" component={LogIn} />
                         </Switch>
                     </Router>
                 </Col>

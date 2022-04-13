@@ -3,12 +3,10 @@ import createSagaMiddleware from 'redux-saga'
 import rootSaga from '../sagas'
 
 import setUser from './redusers/setUser'
-import removeUser from './redusers/removeUser'
 
 const sagaMiddleware = createSagaMiddleware()
 const redusers = combineReducers({
-    setUser,
-    removeUser,
+    setUser
 })
 const store = createStore( 
     redusers,

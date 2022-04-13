@@ -1,20 +1,16 @@
-import React, { useReducer } from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { Row, Col } from 'antd';
 
-import { Link, useNavigate } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
-
 import log from './loginStyle.module.scss'
 import 'antd/dist/antd.css';
-import reduser from '../../redux/redusers/setUser';
 
-// Создать еще два страницы по регистрации и по входу 
-// переделать эту форму
+const FormUser = ({title, status, hendleClick}) => {
+  const [email, setEmail] = useState('')
+  const [pass, setPass] = useState('')
 
-const FormUser = () => {
-  const onFinish = (values) => {
-    console.log('values: ', values);
+  const onFinish = () => {
+    hendleClick(email, pass)
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -23,7 +19,7 @@ const FormUser = () => {
 
   return (
     <div className={log.login}>
-      <span className={log.title}>Authorization</span>
+      <span className={log.title}>{status}</span>
        <Row align='center'>
       <Col xs={24} xm={24} md={24} sm={24}>
       <Form  name="basic" labelCol={{ span: 5 }}
@@ -45,7 +41,7 @@ const FormUser = () => {
           },
         ]}
       >
-        <Input />
+        <Input value={email} onChange={e => setEmail(e.target.value)} />
       </Form.Item>
 
       <Form.Item label="Password" name="password" rules={[
@@ -55,7 +51,7 @@ const FormUser = () => {
           },
         ]}
       >
-        <Input.Password />
+        <Input.Password value={pass} onChange={e => setPass(e.target.value)} />
       </Form.Item>
 
       <Form.Item
@@ -76,10 +72,12 @@ const FormUser = () => {
         }}
       >
         <Button className={log.button} type="primary" htmlType="submit">
-          LogIn
-        </Button>
+           {title}
+          </Button>
       </Form.Item>
+      
     </Form>
+      
       </Col>
     </Row>
     </div>
