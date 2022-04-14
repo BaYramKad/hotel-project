@@ -1,5 +1,5 @@
-import React from 'react'
-import { useDispatch } from "react-redux";
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
@@ -7,33 +7,38 @@ import FormUser from '../FormUser'
 import { setUserAction } from '../../redux/redusers/setUser'
 
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
 
-function SingUp() {
+
+function SingUp(users) {
     const dispatch = useDispatch()
     const { push } = useHistory()
     const auth = getAuth();
 
     const hendleSingUp = async (email, password) => {
-      onAuthStateChanged(auth, (user) => {
-        console.log('user: ', user);
-        if (user.email !== email) {
+      const db = getDatabase();
+      for(let value in users) {
+        if(email !== users[value].email) {
           createUserWithEmailAndPassword(auth, email, password)
             .then(({user}) => {
-              dispatch(setUserAction({
-                email: user.email,
-                token: user.accessToken,
-                uid: user.uid
-              }))
-              push('/layout')
+                dispatch(setUserAction({
+                  email: user.email,
+                  token: user.accessToken,
+                  uid: user.uid
+                }))
+                set(ref(db, 'users/' + user.uid), { 
+                  email: user.email,
+                  uid: user.uid 
+                });
+                console.log('Отправили данные', user);
+                push('/rooms')
             })
-            .catch((error) => {
-              console.log(error);
-          });
+            break
         } else {
-          push('/')
+          push('/login')
+          break
         }
-      });
-      
+      }
     }
 
   return (<>
@@ -42,7 +47,7 @@ function SingUp() {
           status='Registration'
           hendleClick={hendleSingUp}
       />
-      <p> or <Link to='/'>Log In</Link></p>
+      <p> or <Link to='/login'>Log In</Link></p>
   </>
     
   )

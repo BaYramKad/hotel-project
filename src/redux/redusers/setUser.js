@@ -2,7 +2,8 @@
 const initial =  {
     email: null,
     token: null,
-    uid: null
+    uid: null,
+    users: []
 }
 
 const setUserReduser = (state = initial, action) => {
@@ -13,7 +14,8 @@ const setUserReduser = (state = initial, action) => {
                 ...state,
                 email: action.payload.email,
                 token: action.payload.token,
-                uid: action.payload.uid
+                uid: action.payload.uid,
+                users: [...state.users, action.payload.email]
             }
         case 'REMOVE_USER': 
             return {

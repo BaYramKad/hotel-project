@@ -6,8 +6,8 @@ import log from './loginStyle.module.scss'
 import 'antd/dist/antd.css';
 
 const FormUser = ({title, status, hendleClick}) => {
-  const [email, setEmail] = useState('')
-  const [pass, setPass] = useState('')
+  const [email, setEmail] = useState()
+  const [pass, setPass] = useState()
 
   const onFinish = () => {
     hendleClick(email, pass)

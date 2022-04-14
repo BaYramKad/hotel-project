@@ -5,7 +5,8 @@ import { removeUserAction }  from '../../redux/redusers/setUser'
 
 import useAuth from '../../hooks/useAuth'
 import { useDispatch } from "react-redux";
-function MainLayout() {
+
+function RoomsTablePage() {
   const dispatch = useDispatch()
   const { isAuth,  email } = useAuth()
 
@@ -13,7 +14,7 @@ function MainLayout() {
      <h1>Welcome</h1> 
     <button onClick={() => dispatch(removeUserAction()) }> For log out {email} </button>
   </div>  : (
-    <Redirect to='/' />
+    <Redirect to='/login' />
   )
 }
-export default MainLayout
+export default RoomsTablePage

@@ -10,6 +10,9 @@ import App from './App';
 import { initializeApp } from "firebase/app";
 import "firebase/auth";
 
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyDNHgwpwUjLwDGSPq9wWZSw6HVjvyvQcIQ",
   authDomain: "hotel-project-9adee.firebaseapp.com",
@@ -26,4 +29,9 @@ const app = initializeApp(firebaseConfig);
 const container = document.getElementById('root');
 const root = createRoot(container);
 
-root.render(<Provider store={store}>, <App tab="home" /></Provider> );
+root.render(
+  <Provider store={store}>,
+    <Router>
+      <App tab="home" />
+    </Router>
+ </Provider> );
