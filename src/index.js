@@ -10,7 +10,7 @@ import App from './App';
 import { initializeApp } from "firebase/app";
 import "firebase/auth";
 
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import {BrowserRouter as Router } from "react-router-dom";
 
 
 const firebaseConfig = {

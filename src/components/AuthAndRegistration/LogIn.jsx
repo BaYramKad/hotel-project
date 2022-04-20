@@ -1,12 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import FormUser from '../FormUser';
 import { setUserAction } from '../../redux/redusers/setUser'
-
 
 function SingIn(users) {
     const dispatch = useDispatch()
@@ -33,14 +32,12 @@ function SingIn(users) {
                 });
                 break
             } else {
-                if(countError === Object.keys(users).length) throw "Error blat"
+                if(countError === Object.keys(users).length) throw 'Invalid username or password'
             }
           }
-
         } catch (error) {
           alert(error)
         }
-          
     }
 
   return (<>
@@ -49,7 +46,6 @@ function SingIn(users) {
           status='Authorization'
           hendleClick={hendleSingIn}
       />
-    <p> or <Link to='/register'>Register</Link></p>
   </>)
 }
 

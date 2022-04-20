@@ -1,9 +1,4 @@
 .App {
-   position: relative;
-   text-align: center;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   height: calc(100vh - 40px);
-   
+  margin: 0;
+  padding: 0;
 }
