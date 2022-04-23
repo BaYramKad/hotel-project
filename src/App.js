@@ -66,14 +66,14 @@ function App() {
                 <Col>
                     <Header />
                         <Route path="/register" component={ () => <SingUp {...users}/> } />
-                            <Route path="/" >
+                            <Route exact path="/" >
                                 <RoomsTablePage
                                     rooms={rooms}
                                     singleRoom={ (id) => history.push(`/rooms/${id}`) }
                                 />
                             </Route>
                         <Route exact path="/login" component={ () => <LogIn {...users}/> } />
-                    <Route path="/rooms/:id">
+                    <Route exact path="/rooms/:id">
                         <SingleRoomPage
                             room={singleRoom && singleRoom}
                             roomsLength={rooms && rooms}
