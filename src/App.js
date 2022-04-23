@@ -83,15 +83,6 @@ function App() {
                     
                 </Col>
             </Row>
-                    <Route path="*">
-                        <h1 style={{
-                            'margin': "40px 0 0 15px",
-                            'textAlign': "center"
-                        }} >Error <br/>
-                        
-                        <Button onClick={() => history.push('/')} type="link" icon={<HomeOutlined />}>Back home</Button>
-                        </h1>
-                    </Route>
         </div>
     );
 }
