@@ -25,7 +25,7 @@ function SingIn(users) {
                       token: user.accessToken,
                       uid: user.uid
                     }))
-                    push('/rooms')
+                    push('/')
                 })
                 .catch((error) => {
                   alert('error: ', error);

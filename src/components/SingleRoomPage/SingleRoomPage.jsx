@@ -51,7 +51,7 @@ function SingleRoomPage({room, roomsLength, deleteRoom}) {
 
   return ( room && <div className={roomStyles.room_wrapper}>
       <div>
-        <Button onClick={() => history.push('/rooms/')}  className={roomStyles.room_button_home} type="link" icon={<HomeOutlined />}>Back home</Button>
+        <Button onClick={() => history.push('/')}  className={roomStyles.room_button_home} type="link" icon={<HomeOutlined />}>Back home</Button>
         <div className={roomStyles.room}>
         <Row justify="space-around">
           <Col span={10}>

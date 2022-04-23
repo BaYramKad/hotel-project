@@ -38,7 +38,7 @@ function SingUp(users) {
                     email: user.email,
                     uid: user.uid 
                   });
-                  push('/rooms')
+                  push('/')
               })
               break
           } else {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Route, useHistory, useLocation } from "react-router-dom";
 
 import './App.css';
-import { Row, Col } from 'antd';
+import { Row, Col, Button } from 'antd';
 
 import RoomsTablePage from './components/Table'
 import SingleRoomPage from './components/SingleRoomPage/SingleRoomPage';
@@ -12,6 +12,7 @@ import Header from './components/Header';
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getDatabase, ref, onValue, set, remove} from "firebase/database";
+import { HomeOutlined } from '@ant-design/icons';
 
 function App() {
     const history = useHistory()
@@ -26,8 +27,8 @@ function App() {
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             console.log(location.pathname);
-            if(location.pathname === '/rooms/') {
-                user ? history.push('/rooms/') : history.push('/login')
+            if(location.pathname === '/') {
+                user ? history.push('/') : history.push('/login')
             }
         })
     }, [])
@@ -46,7 +47,7 @@ function App() {
 
     useEffect(() => {
             let roomId = location.pathname.split('/rooms/')[1]
-            if(rooms) {
+            if(rooms && roomId) {
                 let singleRoomObj = rooms.find(item => item.id === roomId)
                 setRoom(singleRoomObj)
             }
@@ -56,7 +57,7 @@ function App() {
         const updateRoom = rooms.filter(item => item.id !== roomId)
         setRooms(updateRoom)
         set(ref(db, 'Rooms/'), updateRoom);
-        history.push('/rooms/')
+        history.push('/')
     }
 
     return (
@@ -65,7 +66,7 @@ function App() {
                 <Col>
                     <Header />
                         <Route path="/register" component={ () => <SingUp {...users}/> } />
-                            <Route exact path="/rooms/" >
+                            <Route exact path="/" >
                                 <RoomsTablePage
                                     rooms={rooms}
                                     singleRoom={ (id) => history.push(`/rooms/${id}`) }
@@ -79,8 +80,18 @@ function App() {
                             deleteRoom={deleteRoom}
                         />
                     </Route>
+                    
                 </Col>
             </Row>
+                    <Route path="*">
+                        <h1 style={{
+                            'margin': "40px 0 0 15px",
+                            'textAlign': "center"
+                        }} >Error <br/>
+                        
+                        <Button onClick={() => history.push('/')} type="link" icon={<HomeOutlined />}>Back home</Button>
+                        </h1>
+                    </Route>
         </div>
     );
 }
