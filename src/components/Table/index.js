@@ -112,7 +112,7 @@ function RoomsTablePage({rooms, singleRoom}) {
       },
       {
         render: (record) => {
-          return  <Button type="primary" onClick={ () => singleRoom(record.number) }>More information</Button>
+          return  <Button type="primary" onClick={ () => singleRoom(record.id) }>More information</Button>
         }
       },
     ];

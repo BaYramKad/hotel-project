@@ -63,4 +63,53 @@
 }
 
 
+.checkin {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.442);
+    border: 2px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 11;
+}
+
+.checkin_rules {
+    min-width: 500px;
+    padding: 20px;
+    background-color: #fff;
+    opacity: 1 !important;
+    z-index:20 !important;
+    .checkout_leave {
+        padding: 20px 0 20px 0;
+    }
+}
+.close {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 20px 0;
+    &_button{
+        cursor: pointer;
+        padding: 3px;
+        border: 2px solid rgba(0, 0, 0, 0);
+        transition: border 0.15s ease-in-out;
+        border-radius: 2px;
+        &:hover {
+            border: 2px solid rgb(0, 0, 0);
+            border-radius: 2px;
+        }
+    }
+}
+
+.checkin_buttons {
+    display: flex;
+    justify-content: flex-end;
+    button:first-child {
+        margin-right: 10px;
+    }
+}
 

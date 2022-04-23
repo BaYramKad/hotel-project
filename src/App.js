@@ -11,46 +11,53 @@ import SingUp from './components/AuthAndRegistration/SingUp';
 import Header from './components/Header';
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getDatabase, ref, onValue} from "firebase/database";
+import { getDatabase, ref, onValue, set, remove} from "firebase/database";
 
 function App() {
     const history = useHistory()
     const location = useLocation()
     const auth = getAuth()
+    const db = getDatabase();
+
     const [ users, setUsers ] = useState()
     const [ rooms, setRooms ] = useState()
-    const [singleRoom, setRoom] = useState()
+    const [ singleRoom, setRoom ] = useState()
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
-            user ? history.push('/rooms/') : history.push('/login')
+            console.log(location.pathname);
+            if(location.pathname === '/rooms/') {
+                user ? history.push('/rooms/') : history.push('/login')
+            }
         })
     }, [])
 
     useEffect(() => {
-        
         const db = getDatabase();
         const starCountRef = ref(db);
             onValue(starCountRef, (snapshot) => {
                 const {users, Rooms, Accounts} = snapshot.val();
-                let result = Rooms.map(item => {
-                    return {
-                        ...item,
-                        key: item.number
-                    }
-                })
                 setUsers(users)
-                setRooms(result)
+                setRooms(Rooms)
             });
     }, [])
+
+
 
     useEffect(() => {
             let roomId = location.pathname.split('/rooms/')[1]
             if(rooms) {
-                let singleRoomObj = rooms.find(item => item.number === Number(roomId))
+                let singleRoomObj = rooms.find(item => item.id === roomId)
                 setRoom(singleRoomObj)
             }
     }, [location.pathname, rooms])
+    
+    const deleteRoom = (roomId) => {
+        const updateRoom = rooms.filter(item => item.id !== roomId)
+        setRooms(updateRoom)
+        set(ref(db, 'Rooms/'), updateRoom);
+        history.push('/rooms/')
+    }
 
     return (
         <div className="App">
@@ -68,6 +75,8 @@ function App() {
                     <Route path="/rooms/:id">
                         <SingleRoomPage
                             room={singleRoom && singleRoom}
+                            roomsLength={rooms && rooms}
+                            deleteRoom={deleteRoom}
                         />
                     </Route>
                 </Col>
