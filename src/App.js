@@ -66,7 +66,7 @@ function App() {
                 <Col>
                     <Header />
                         <Route path="/register" component={ () => <SingUp {...users}/> } />
-                            <Route exact path="/" >
+                            <Route path="/" >
                                 <RoomsTablePage
                                     rooms={rooms}
                                     singleRoom={ (id) => history.push(`/rooms/${id}`) }
@@ -83,7 +83,7 @@ function App() {
                     
                 </Col>
             </Row>
-                    <Route path="*">
+                    {/* <Route path="/">
                         <h1 style={{
                             'margin': "40px 0 0 15px",
                             'textAlign': "center"
@@ -91,7 +91,7 @@ function App() {
                         
                         <Button onClick={() => history.push('/')} type="link" icon={<HomeOutlined />}>Whatch rooms</Button>
                         </h1>
-                    </Route>
+                    </Route> */}
         </div>
     );
 }
