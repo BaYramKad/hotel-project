@@ -27,7 +27,7 @@ function App() {
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             console.log(location.pathname);
-            if(location.pathname === '/') {
+            if(location.pathname === '/hotel-project/') {
                 user ? history.push('/') : history.push('/login')
             }
         })
@@ -64,7 +64,7 @@ function App() {
         <div className="App">
             <Row>
                 <Col>
-                    <Header />
+                    { rooms && <Header /> }
                         <Route path="/register" component={ () => <SingUp {...users}/> } />
                             <Route exact path="/" >
                                 <RoomsTablePage
