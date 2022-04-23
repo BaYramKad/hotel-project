@@ -83,6 +83,15 @@ function App() {
                     
                 </Col>
             </Row>
+                    <Route path="*">
+                        <h1 style={{
+                            'margin': "40px 0 0 15px",
+                            'textAlign': "center"
+                        }}> Welcome to Hotel <br/>
+                        
+                        <Button onClick={() => history.push('/')} type="link" icon={<HomeOutlined />}>Whatch rooms</Button>
+                        </h1>
+                    </Route>
         </div>
     );
 }
